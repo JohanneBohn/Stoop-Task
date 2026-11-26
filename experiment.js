@@ -1,5 +1,10 @@
 const jsPsych = initJsPsych();
-jsPsych.run([{
+
+const stimulus = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<p>Works?</p>"
-}]);
+    stimulus: '<p class="word" style="color: blue">RED</p>',
+    choices: "NO_KEYS",
+    trial_duration: 2000
+};
+
+jsPsych.run([stimulus])
