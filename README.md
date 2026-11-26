@@ -1,4 +1,4 @@
-# Stoop-Task
+# Stroop-Task
 Cog-Sup S1 - Experimental approach - Session 4
 
 Create a simple Stroop task using HTML to structure the page, CSS to control its appearance, and JsPsych to run the experiment. 
