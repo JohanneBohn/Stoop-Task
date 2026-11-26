@@ -101,5 +101,23 @@ const main = {
     timeline_variables: trials
 };
 
+function downloadCSV() {
+    const cols = ["trial_number", "word", "ink", "condition", "key", "correct", "rt"];
+    const rows = jsPsych.data.get().filter({ task: "stroop" }).values();
+    const csv = [cols.join(","), ...rows.map(r => cols.map(c => r[c]).join(","))].join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = "stroop_results.csv";
+    a.click();
+}
 
-jsPsych.run([instructions, main])
+const end = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "<p>The experiment is over.</p>",
+    choices: ["Download results (CSV)"],
+    on_start: () => { document.getElementById("mapping").hidden = true; },
+    on_finish: downloadCSV
+};
+
+
+jsPsych.run([instructions, main, end])
