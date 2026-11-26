@@ -1,25 +1,18 @@
 const jsPsych = initJsPsych();
 
-const stimulus = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p class="word" style="color: blue">RED</p>`,
-    choices: "NO_KEYS",
-    trial_duration: 2000
-};
-
-const colors = {
+const COLORS = {
     red: { hex: "#d00000", key: "e" },
     green: { hex: "#008000", key: "f" },
     blue: { hex: "#0040ff", key: "j" },
     purple: { hex: "#8000a0", key: "o" }
 };
 
-const names = Object.keys(colors);
+const NAMES = Object.keys(COLORS);
 
-const keys = names.map(n => colors[n].key);
+const KEYS = NAMES.map(n => COLORS[n].key);
 
-const mappingText = names
-    .map(n => `${colors[n].key.toUpperCase()} = ${n}`)
+const mappingText = NAMES
+    .map(n => `${COLORS[n].key.toUpperCase()} = ${n}`)
     .join(" &nbsp;|&nbsp; ");
 
 const instructions = {
@@ -35,5 +28,12 @@ const instructions = {
     }
 };
 
+const trial = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `<p class="word" style="color: blue">RED</p>`,
+    choices: KEYS,
+    response_ends_trial: true
+};
 
-jsPsych.run([instructions, stimulus])
+
+jsPsych.run([instructions, trial])
